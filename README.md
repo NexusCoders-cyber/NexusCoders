@@ -1,18 +1,16 @@
 # NexusCoders WhatsApp Bot
 
-![NexusCoders Logo](path/to/your/logo.png)
-
 A versatile WhatsApp bot built by the NexusCoders team. This bot is designed to be easily customizable and deployable on various platforms.
 
 ## Features
 
 - 🚀 Easy setup and deployment
 - 🔒 Secure authentication via QR code or pairing code
+- 💾 Session management for persistent connections
 - 📚 Modular command system for easy expansion
 - 🚦 Rate limiting to prevent spam
 - 💾 Persistent storage using SQLite
 - 📊 Logging for tracking bot activities and errors
-- 🧪 Unit testing for reliable functionality
 
 ## Prerequisites
 
@@ -37,9 +35,15 @@ A versatile WhatsApp bot built by the NexusCoders team. This bot is designed to 
    npm install
    ```
 
-4. Set up the configuration:
-   - Rename `config.example.js` to `config.js`
-   - Adjust the settings in `config.js` as needed
+## Configuration
+
+1. Create a `.env` file in the root directory of the project.
+2. Add the following environment variables:
+   ```
+   SESSION_ID=your-unique-session-id
+   USE_REMOTE_AUTH=false
+   ```
+   Replace `your-unique-session-id` with a unique identifier for your bot session.
 
 ## Usage
 
@@ -49,13 +53,35 @@ A versatile WhatsApp bot built by the NexusCoders team. This bot is designed to 
    ```
 
 2. Authenticate your WhatsApp account:
+
+   Option 1: Scan QR Code
    - A QR code will be displayed in the console
    - Open WhatsApp on your phone
-   - Go to Settings > WhatsApp Web/Desktop
-   - Click "Link a device"
-   - Scan the QR code displayed in the console
+   - Go to Settings > Linked Devices
+   - Tap on "Link a Device"
+   - Point your phone camera at the QR code in the console
+
+   Option 2: Use Pairing Code
+   - If the console displays a pairing code instead of a QR code:
+   - Open WhatsApp on your phone
+   - Go to Settings > Linked Devices
+   - Tap on "Link a Device"
+   - Tap "Link with phone number"
+   - Enter the 8-digit pairing code displayed in the console
 
 3. Once authenticated, the bot is ready to use! Send `!help` in any chat to see available commands.
+
+## Session Management
+
+The bot uses session management to maintain persistent connections. If you're deploying the bot on a server or want to use remote authentication:
+
+1. Set `USE_REMOTE_AUTH=true` in your `.env` file.
+2. Implement a custom store for RemoteAuth (refer to whatsapp-web.js documentation for details).
+
+## Available Commands
+
+- `!help`: List all available commands
+- `!ping`: Check if the bot is responsive
 
 ## Adding New Commands
 
@@ -82,29 +108,15 @@ module.exports = {
 
 3. The command will be automatically loaded and available for use.
 
-## Running Tests
+## Troubleshooting
 
-To run the test suite:
+If you encounter any issues:
 
-```
-npm test
-```
-
-## Deployment
-
-### Heroku
-
-1. Install the Heroku CLI and log in.
-2. In your project directory, run:
-   ```
-   heroku create
-   git push heroku main
-   heroku ps:scale worker=1
-   ```
-
-### Other Platforms
-
-(Add deployment instructions for other platforms as needed)
+1. Make sure you have the latest version of Node.js installed.
+2. Try deleting the `.wwebjs_auth` folder in the project directory and restart the bot.
+3. Ensure your WhatsApp app is up to date.
+4. Check the console for any error messages.
+5. If using RemoteAuth, ensure your store implementation is correct.
 
 ## Contributing
 
@@ -120,4 +132,88 @@ This bot is not affiliated with, authorized, maintained, sponsored or endorsed b
 
 ---
 
-Made with ❤️ by NexusCoders
+Made with ❤️ by NexusCoders# NexusCoders WhatsApp Bot
+
+A versatile WhatsApp bot built by the NexusCoders team. This bot is designed to be easily customizable and deployable on various platforms.
+
+## Features
+
+- 🚀 Easy setup and deployment
+- 🔒 Secure authentication via QR code or pairing code
+- 💾 Session management for persistent connections
+- 📚 Modular command system for easy expansion
+- 🚦 Rate limiting to prevent spam
+- 💾 Persistent storage using SQLite
+- 📊 Logging for tracking bot activities and errors
+
+## Prerequisites
+
+- Node.js (v14 or newer)
+- npm (Node Package Manager)
+- A smartphone with WhatsApp installed
+
+## Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/NexusCoders/whatsapp-bot.git
+   ```
+
+2. Navigate to the project directory:
+   ```
+   cd whatsapp-bot
+   ```
+
+3. Install dependencies:
+   ```
+   npm install
+   ```
+
+## Configuration
+
+1. Create a `.env` file in the root directory of the project.
+2. Add the following environment variables:
+   ```
+   SESSION_ID=your-unique-session-id
+   USE_REMOTE_AUTH=false
+   ```
+   Replace `your-unique-session-id` with a unique identifier for your bot session.
+
+## Usage
+
+1. Start the bot:
+   ```
+   npm start
+   ```
+
+2. Authenticate your WhatsApp account:
+
+   Option 1: Scan QR Code
+   - A QR code will be displayed in the console
+   - Open WhatsApp on your phone
+   - Go to Settings > Linked Devices
+   - Tap on "Link a Device"
+   - Point your phone camera at the QR code in the console
+
+   Option 2: Use Pairing Code
+   - If the console displays a pairing code instead of a QR code:
+   - Open WhatsApp on your phone
+   - Go to Settings > Linked Devices
+   - Tap on "Link a Device"
+   - Tap "Link with phone number"
+   - Enter the 8-digit pairing code displayed in the console
+
+3. Once authenticated, the bot is ready to use! Send `!help` in any chat to see available commands.
+
+## Session Management
+
+The bot uses session management to maintain persistent connections. If you're deploying the bot on a server or want to use remote authentication:
+
+1. Set `USE_REMOTE_AUTH=true` in your `.env` file.
+2. Implement a custom store for RemoteAuth (refer to whatsapp-web.js documentation for details).
+
+## Available Commands
+
+- `!help`: List all available commands
+- `!ping`: Check if the bot is responsive
+
