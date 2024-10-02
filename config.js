@@ -1,9 +1,11 @@
 module.exports = {
-    botName: 'NexusCoders',
     prefix: '!',
     rateLimitWindow: 60000,
     rateLimitMax: 5,
-    dbPath: './bot.sqlite',
-    logPath: './bot.log',
-    timeZone: 'UTC'
+    timeZone: 'UTC',
+    dbPath: './nexuscoders_bot.sqlite',
+    logPath: './nexuscoders_bot.log',
+    botName: 'NexusCoders Bot',
+    version: '1.0.0',
+    owner: 'NexusCoders Team'
 };
