@@ -1,4 +1,4 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
+const { Client, LocalAuth, RemoteAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const fs = require('fs');
 const path = require('path');
@@ -7,8 +7,15 @@ const logger = require('./logger');
 const { getUser, updateUser } = require('./database');
 const moment = require('moment-timezone');
 
+const sessionId = process.env.SESSION_ID || 'default-session';
+
 const client = new Client({
-    authStrategy: new LocalAuth(),
+    authStrategy: process.env.USE_REMOTE_AUTH === 'true' 
+        ? new RemoteAuth({
+            store: {},
+            clientId: sessionId,
+        })
+        : new LocalAuth({ clientId: sessionId }),
     puppeteer: {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -25,7 +32,7 @@ for (const file of commandFiles) {
 }
 
 client.on('qr', (qr) => {
-    logger.info('QR Code received');
+    logger.info('QR Code received. Scan it with your WhatsApp app:');
     qrcode.generate(qr, { small: true });
 });
 
