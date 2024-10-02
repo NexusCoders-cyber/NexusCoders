@@ -3,7 +3,7 @@ const logger = require('../logger');
 
 module.exports = {
   name: 'info',
-  description: 'Sends information about the bot',
+  description: 'Sends information about bot',
   async execute(client, message, args) {
     try {
       const name = "Nexus MD";
