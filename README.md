@@ -1,5 +1,7 @@
 # NexusCoders WhatsApp Bot
-
+<div align="center">
+  <img src="https://tiny.one/yp48vtzf" alt="Alt text for the image" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" width="300">
+</div>
 A versatile WhatsApp bot built by the NexusCoders team. This bot is designed to be easily customizable and deployable on various platforms.
 
 ## Features
