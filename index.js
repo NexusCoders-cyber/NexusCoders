@@ -73,6 +73,8 @@ client.on('message', async (message) => {
                 logger.error(`Error executing command ${commandName}: ${error}`);
                 message.reply('There was an error executing that command.');
             }
+        } else {
+            message.reply('Unknown command. Type !menu to see available commands.');
         }
     }
 });
@@ -85,4 +87,10 @@ process.on('unhandledRejection', (reason, promise) => {
 
 process.on('uncaughtException', (error) => {
     logger.error('Uncaught Exception:', error);
+});
+
+process.on('SIGINT', async () => {
+    logger.info('Shutting down...');
+    await client.destroy();
+    process.exit(0);
 });
