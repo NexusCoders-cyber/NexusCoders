@@ -2,7 +2,7 @@ const axios = require('axios');
 const logger = require('../logger');
 
 module.exports = {
-  name: 'translate',
+  name: 'trans',
   description: 'Translate text to desired language',
   async execute(client, message, args) {
     try {
