@@ -59,5 +59,3 @@ Description: ${command.description}\n
     }
   },
 };
-
-i updated it already is it okay?
