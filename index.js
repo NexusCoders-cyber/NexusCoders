@@ -8,7 +8,7 @@ const logger = require('./logger');
 const { getUser, updateUser } = require('./database');
 const moment = require('moment-timezone');
 
-const sessionId = process.env.SESSION_ID || 'default-session';
+const sessionId = process.env.SESSION_ID || 'nexuscoders-session';
 
 const client = new Client({
     authStrategy: process.env.USE_REMOTE_AUTH === 'true' 
@@ -33,12 +33,12 @@ for (const file of commandFiles) {
 }
 
 client.on('qr', (qr) => {
-    logger.info('QR Code received. Scan it with your WhatsApp app:');
+    logger.info('NexusCoders Bot QR Code received. Scan it with your WhatsApp app:');
     qrcode.generate(qr, { small: true });
 });
 
 client.on('ready', () => {
-    logger.info('Client is ready');
+    logger.info('NexusCoders Bot is ready');
 });
 
 client.on('message', async (message) => {
@@ -74,7 +74,7 @@ client.on('message', async (message) => {
                 message.reply('There was an error executing that command.');
             }
         } else {
-            message.reply('Unknown command. Type !menu to see available commands.');
+            message.reply('Unknown command. Type !help to see available commands.');
         }
     }
 });
@@ -90,7 +90,7 @@ process.on('uncaughtException', (error) => {
 });
 
 process.on('SIGINT', async () => {
-    logger.info('Shutting down...');
+    logger.info('NexusCoders Bot shutting down...');
     await client.destroy();
     process.exit(0);
 });
